@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/*"
+  to = "https://api.igdb.com/v4"
+  status = 200
