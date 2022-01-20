@@ -2,7 +2,7 @@ import * as axios from "axios";
 
 const getGameList = (query) => {
     return axios({
-        url: "/games",
+        url: `${process.env.REACT_APP_API}/games`,
         method: 'POST',
         headers: {
             'Accept': 'application/json',
