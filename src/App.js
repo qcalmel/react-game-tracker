@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-import GameSearch from "./components/GameSearch";
+import {GameTracker} from "./components/GameTracker";
 
 function App() {
   return (
     <div className="App">
-      <GameSearch/>
+      <GameTracker/>
     </div>
   );
 }

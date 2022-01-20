@@ -4,10 +4,14 @@ import GameList from "./GameList";
 import axios from "axios";
 import {getGameList} from "../helpers/api";
 import {sortArrayByProperty} from "../helpers/sorting";
+import {useParams} from "react-router-dom";
+import {useContext} from "react";
+import {GameListContext} from "./GameTracker";
 
 const GameSearch = () => {
-    const [gameList, setGameList] = React.useState([])
-    const [search, setSearch] = React.useState('')
+    const {gameList,setGameList} = useContext(GameListContext)
+    // const [gameList, setGameList] = React.useState([])
+    const [search, setSearch] = React.useState(useParams().query)
     const [error, setError] = React.useState(null)
     const [isLoading, setIsLoading] = React.useState(false)
 
