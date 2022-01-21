@@ -34,7 +34,7 @@ const GameSearch = () => {
     return (
         <div>
             <SearchInput onSearch={handleSearch}/>
-            {searchedGameList.length > 0 && !isLoading ? searchedGameList.length + " Games Founded" : null}
+            {searchedGameList.length > 0 && !isLoading ? searchedGameList.length + " Games Found" : null}
             {
                 isLoading
                     ?
