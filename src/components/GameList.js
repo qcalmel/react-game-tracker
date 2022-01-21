@@ -1,11 +1,15 @@
-import * as React from "react";
-import {useNavigate} from "react-router-dom";
+// import {useNavigate} from "react-router-dom";
 
-const GameList = ({games}) => {
-    const navigate = useNavigate()
+const GameList = ({games,trackedGameID, onRowCLick}) => {
+    // const navigate = useNavigate()
     const handleRowClick = (id) => {
-        navigate(`/game/${id}`)
+        // navigate(`/game/${id}`)
+        onRowCLick(id)
     }
+
+    const isTrackedGame = (id) => (
+        trackedGameID?.some((trackedGameId) => trackedGameId === id)
+    )
     return (
         <table className="styled-table">
             <thead>
@@ -19,7 +23,7 @@ const GameList = ({games}) => {
             <tbody>
             {games.map((game) => (
                     <tr key={game.id} onClick={()=> handleRowClick(game.id) }>
-                        <td>
+                        <td className={`${isTrackedGame(game.id) && "tracked"}`}>
                             {game.name}
                         </td>
                         <td>
