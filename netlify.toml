@@ -2,7 +2,11 @@
   from = "/api/*"
   to = "https://api.igdb.com/v4/:splat"
   status = 200
-  [build]
-  command = "npm run build"
-  publish = "build"
-  environment = {REACT_APP_API = "/api"}
+[[redirects]]
+    from = "/*"
+    to = "/index.html"
+    status = 200
+#   [build]
+#   command = "npm run build"
+#   publish = "build"
+#   environment = {REACT_APP_API = "/api"}
