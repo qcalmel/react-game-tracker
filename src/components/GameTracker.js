@@ -8,24 +8,33 @@ const GameListContext = createContext({})
 
 const GameTracker = () => {
 
-    const [searchedGameList,setSearchedGameList] = useState([])
-    const [trackedGameList,setTrackedGameList] = useState([])
-    const [trackedGameID,setTrackedGameID] = useState(JSON.parse(localStorage.getItem('trackedGames')))
+    const [searchedGameList, setSearchedGameList] = useState([])
+    const [trackedGameList, setTrackedGameList] = useState([])
+    const [trackedGameID, setTrackedGameID] = useState(JSON.parse(localStorage.getItem('trackedGames')) ?? [])
 
     const handleTrack = (id) => {
-        if(trackedGameID.some(trackedIDGame => trackedIDGame === id)){
+        if (trackedGameID.some(trackedIDGame => trackedIDGame === id))
             setTrackedGameID([...trackedGameID].filter(trackedIdGame => trackedIdGame !== id))
-        }
-        else{
-            setTrackedGameID([...trackedGameID,id])
-        }
+        else
+            setTrackedGameID([...trackedGameID, id])
+
     }
 
-    useEffect(() =>{
-        localStorage.setItem('trackedGames',JSON.stringify(trackedGameID))
-    },[trackedGameID])
+    useEffect(() => {
+        if (trackedGameID.length > 0)
+            localStorage.setItem('trackedGames', JSON.stringify(trackedGameID))
+        else
+            localStorage.removeItem('trackedGames')
+    }, [trackedGameID])
     return (
-        <GameListContext.Provider value={{searchedGameList,setSearchedGameList,trackedGameID,handleTrack,trackedGameList,setTrackedGameList}}>
+        <GameListContext.Provider value={{
+            searchedGameList,
+            setSearchedGameList,
+            trackedGameID,
+            handleTrack,
+            trackedGameList,
+            setTrackedGameList
+        }}>
             <div>
                 <nav>
                     <ul>
@@ -33,7 +42,8 @@ const GameTracker = () => {
                             <NavLink className={({isActive}) => isActive ? "active" : ''} to="/search">Search</NavLink>
                         </li>
                         <li>
-                            <NavLink className={({isActive}) => isActive ? "active" : ''} to="/tracked">Tracked Games</NavLink>
+                            <NavLink className={({isActive}) => isActive ? "active" : ''} to="/tracked">Tracked
+                                Games</NavLink>
                         </li>
                     </ul>
                 </nav>
@@ -47,4 +57,4 @@ const GameTracker = () => {
     )
 }
 
-export {GameTracker,GameListContext}
+export {GameTracker, GameListContext}
