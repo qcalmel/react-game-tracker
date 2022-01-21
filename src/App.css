@@ -43,6 +43,10 @@
   background: #89dccb;
 }
 
+.styled-table .tracked {
+  color: green;
+}
+
 nav ul {
   list-style-type: none;
   margin: 0;
