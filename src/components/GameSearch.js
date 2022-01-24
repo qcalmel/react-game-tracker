@@ -7,7 +7,12 @@ import {useContext, useEffect, useState} from "react";
 import {GameListContext} from "./GameTracker";
 
 const GameSearch = () => {
-    const {searchedGameList,setSearchedGameList,trackedGameID,handleTrack} = useContext(GameListContext)
+    const {
+        searchedGameList,
+        setSearchedGameList,
+        trackedGameID,
+        handleTrack
+    } = useContext(GameListContext)
     // const [gameList, setGameList] = React.useState([])
     const [search, setSearch] = useState(useParams().query)
     const [error, setError] = useState(null)
@@ -17,7 +22,7 @@ const GameSearch = () => {
         if (!search) return
         getGameList(search)
             .then(res => {
-                setSearchedGameList(sortArrayByProperty(res.data,'first_release_date'))
+                setSearchedGameList(sortArrayByProperty(res.data, 'first_release_date'))
                 setIsLoading(false)
             })
             .catch(error => {
@@ -34,7 +39,7 @@ const GameSearch = () => {
     return (
         <div>
             <SearchInput onSearch={handleSearch}/>
-            {searchedGameList.length > 0 && !isLoading ? searchedGameList.length + " Games Found" : null}
+            <h3>{searchedGameList.length > 0 && !isLoading ? searchedGameList.length + " Games Found" : null}</h3>
             {
                 isLoading
                     ?
@@ -43,12 +48,12 @@ const GameSearch = () => {
                     (
                         searchedGameList.length > 0
                             ?
-                            <GameList games={searchedGameList} trackedGameID={trackedGameID} onRowCLick={handleTrack}/>
+                            <GameList games={searchedGameList} trackedGameID={trackedGameID} onTrack={handleTrack}/>
                             :
                             null
                     )
             }
-            {search && searchedGameList.length === 0 && !isLoading ? 'No Games Found' : null}
+            <h3>{search && searchedGameList.length === 0 && !isLoading ? 'No Games Found' : null}</h3>
         </div>
 
     )
