@@ -1,8 +1,10 @@
 import * as axios from "axios";
 
+const baseURL = process.env.REACT_APP_API
+
 const getGameList = (query) => {
     return axios({
-        url: `${process.env.REACT_APP_API}/games`,
+        url: `${baseURL}/games`,
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -20,7 +22,7 @@ const getGameList = (query) => {
 const getTrackedGameList = (trackedListID) => {
 
     return axios({
-        url: `${process.env.REACT_APP_API}/games`,
+        url: `${baseURL}/games`,
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -34,4 +36,20 @@ const getTrackedGameList = (trackedListID) => {
     })
 }
 
-export {getGameList,getTrackedGameList}
+const getSingleGame = (id) => {
+
+    return axios({
+        url: `${baseURL}/games`,
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Client-ID': 'vdyvkae7tp66ret5xpmzl00h0je5eu',
+            'Authorization': 'Bearer zacq1qom1jddqxijm9d5ioqb9hyo3m',
+        },
+        data:
+            `fields id,name,first_release_date,platforms.name,genres.name,cover.image_id;
+             where id = ${id};`
+    })
+}
+
+export {getGameList,getTrackedGameList,getSingleGame}
