@@ -9,9 +9,10 @@
   font-size: 0.9em;
   font-family: sans-serif;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  width: 800px;
 }
 .styled-table thead tr {
-  background-color: #009879;
+  background-color: #04AA6D;
   color: #ffffff;
   text-align: center;
 }
@@ -31,15 +32,20 @@
 }
 
 .styled-table tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
+  border-bottom: 2px solid #04AA6D;
 }
 .styled-table tbody tr.active-row {
   font-weight: bold;
   color: #009879;
 }
 
-.styled-table tbody tr:hover{
+.styled-table .game-row {
   cursor: pointer;
+
+}
+
+.styled-table .game-row:hover{
+
   background: #89dccb;
 }
 
@@ -74,4 +80,52 @@ nav li a:hover:not(.active) {
 nav .active {
   background-color: #04AA6D;
 }
+
+.expandable {
+}
+
+.game-details{
+  display: flex;
+}
+
+.game-cover {
+  width: 150px;
+  display: inline-block;
+}
+
+
+.game-cover img {
+  object-fit: contain;
+  width: 100%;
+  display: block;
+  padding-bottom: 15px;
+}
+
+.game-content {
+  width: 620px;
+  display: inline-block;
+  padding: 15px;
+  box-sizing: border-box;
+}
+.btn{
+  border: none;
+  color: white;
+  background-color: #04AA6D;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-red{
+  background-color: #d34444;
+}
+
+.search-input{
+  border: none;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  padding: 10px 20px;
+  margin-top: 20px;
+}
+
 
