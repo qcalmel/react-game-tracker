@@ -2,11 +2,10 @@ import * as React from "react";
 
 const SearchInput = ({onSearch}) => {
     const inputRef = React.useRef()
-    const handleClick = e => {
+    const handleClick = () => {
         onSearch(inputRef.current.value)
     }
     const handleKeypress = e => {
-        //it triggers by pressing the enter key
         if (e.key === 'Enter') {
             handleClick(e);
         }
@@ -14,9 +13,8 @@ const SearchInput = ({onSearch}) => {
 
     return (
         <div>
-            <h2>Search Games</h2>
-            <input type='text' ref={inputRef} placeholder='Search' onKeyPress={handleKeypress}/>
-            <button onClick={handleClick}>Search</button>
+            <input className='search-input' type='text' ref={inputRef} placeholder='Search' onKeyPress={handleKeypress}/>
+            <button className='btn' onClick={handleClick}>Search</button>
         </div>
     )
 }
