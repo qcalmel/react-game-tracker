@@ -1,5 +1,6 @@
-import {useState} from "react";
+import {Fragment, useState} from "react";
 import GameDetails from "./GameDetails";
+import {getDate} from "../helpers/date";
 
 const GameList = ({games, trackedGameID, onTrack}) => {
     const [expandedGame, setExpandedGame] = useState('')
@@ -27,13 +28,13 @@ const GameList = ({games, trackedGameID, onTrack}) => {
             </thead>
             <tbody>
             {games.map((game) => (
-                <>
-                    <tr className="game-row" key={game.id} onClick={() => handleRowClick(game.id)}>
+                <Fragment key={game.id}>
+                    <tr className="game-row"  onClick={() => handleRowClick(game.id)}>
                         <td className={`${isTrackedGame(game.id) && "tracked"}`}>
                             {game.name}
                         </td>
                         <td>
-                            {new Date(game.first_release_date * 1000).toLocaleDateString("fr-FR")}
+                            {getDate(game)}
                         </td>
                         {/*<td>*/}
                         {/*    {game.platforms?.map((platform,i)=>(game.platforms.length === i ? platform.name : platform.name + ", "))}*/}
@@ -41,14 +42,14 @@ const GameList = ({games, trackedGameID, onTrack}) => {
                     </tr>
                     {
                         expandedGame === game.id && (
-                            <tr className='expandable'>
+                            <tr className='expandable' key={'expanded-game' + game.id}>
                                 <td colSpan={2} >
                                     <GameDetails gameID={game.id} isTracked={isTrackedGame(game.id)} onTrack={onTrack}/>
                                 </td>
                             </tr>
                         )
                     }
-                </>
+                </Fragment>
             ))}
             </tbody>
         </table>
