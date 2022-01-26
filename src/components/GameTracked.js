@@ -2,6 +2,7 @@ import GameList from "./GameList";
 import {useContext, useEffect} from "react";
 import {GameListContext} from "./GameTracker";
 import {getTrackedGameList} from "../helpers/api";
+import {sortArrayByProperty} from "../helpers/sorting";
 
 const GameTracked = () => {
     const {trackedGameID,trackedGameList,setTrackedGameList,handleTrack} = useContext(GameListContext)
@@ -10,7 +11,7 @@ const GameTracked = () => {
         if (trackedGameID.length > 0){
         getTrackedGameList(trackedGameID)
             .then(res => {
-                setTrackedGameList(res.data)
+                setTrackedGameList(sortArrayByProperty(res.data,"first_release_date"))
             })
             .catch(err=>console.log(err))
         }else {
