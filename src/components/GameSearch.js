@@ -13,7 +13,6 @@ const GameSearch = () => {
         trackedGameID,
         handleTrack
     } = useContext(GameListContext)
-    // const [gameList, setGameList] = React.useState([])
     const [search, setSearch] = useState(useParams().query)
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -27,23 +26,36 @@ const GameSearch = () => {
             })
             .catch(error => {
                 setError(error);
+                setSearchedGameList([])
+                setIsLoading(false)
             })
-    }, [search])
 
+    }, [search])
     const handleSearch = (text) => {
         if (text !== search && text) {
             setSearch(text)
             setIsLoading(true)
+            setError(null)
+        }
+    }
+
+    const showMessage = () => {
+        if(error)
+            return 'An error has occurred, please try later'
+        if(searchedGameList.length > 0 && !isLoading)
+            return searchedGameList.length + " Games Found"
+        if(search && !isLoading) {
+            return 'No Games Found'
         }
     }
     return (
         <div>
             <SearchInput onSearch={handleSearch}/>
-            <h3>{searchedGameList.length > 0 && !isLoading ? searchedGameList.length + " Games Found" : null}</h3>
+            <h3>{showMessage()}</h3>
             {
                 isLoading
                     ?
-                    'Loading'
+                    <h3>Loading...</h3>
                     :
                     (
                         searchedGameList.length > 0
@@ -53,7 +65,6 @@ const GameSearch = () => {
                             null
                     )
             }
-            <h3>{search && searchedGameList.length === 0 && !isLoading ? 'No Games Found' : null}</h3>
         </div>
 
     )
