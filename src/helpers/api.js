@@ -12,7 +12,7 @@ const getGameList = (query) => {
             'Authorization': 'Bearer zacq1qom1jddqxijm9d5ioqb9hyo3m',
         },
         data:
-            `fields id,name,first_release_date,platforms.name;
+            `fields id,name,first_release_date,platforms.name,release_dates.human,release_dates.category,release_dates.date;
              search "${query}";
              where version_parent = null & category = 0;
              limit 200;`
@@ -30,7 +30,7 @@ const getTrackedGameList = (trackedListID) => {
             'Authorization': 'Bearer zacq1qom1jddqxijm9d5ioqb9hyo3m',
         },
         data:
-            `fields id,name,first_release_date,platforms.name;
+            `fields id,name,first_release_date,platforms.name,release_dates.human,release_dates.category,release_dates.date;
              where id = (${trackedListID.toString()}) & version_parent = null & category = 0;
              limit 200;`
     })
