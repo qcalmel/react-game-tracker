@@ -11,7 +11,13 @@ const GameDetails = ({gameID, isTracked, onTrack}) => {
                 setGame(res.data[0])
                 setIsLoading(false)
             })
-    })
+    },[])
+    const getCover = (coverID) => {
+        const baseURL = '//images.igdb.com/igdb/image/upload/t_cover_big/'
+        if(coverID)
+            return baseURL + coverID + '.jpg'
+        return baseURL + 'nocover.png'
+    }
     return (
         <>
             {
@@ -24,8 +30,9 @@ const GameDetails = ({gameID, isTracked, onTrack}) => {
                         <div className='game-details'>
                             <div className='game-cover'>
                                 <img
-                                    src={'//images.igdb.com/igdb/image/upload/t_cover_big/' + game.cover.image_id + '.jpg'}
-                                    alt='game cover'/>
+                                    src={getCover(game.cover?.image_id)}
+                                    alt='game cover'
+                                />
                                 <input
                                     onClick={() => onTrack(game.id)}
                                     type='button'
