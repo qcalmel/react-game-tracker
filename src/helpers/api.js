@@ -12,10 +12,17 @@ const getGameList = (query) => {
             'Authorization': 'Bearer zacq1qom1jddqxijm9d5ioqb9hyo3m',
         },
         data:
-            `fields id,name,first_release_date,platforms.name,release_dates.human,release_dates.category,release_dates.date;
-             search "${query}";
-             where version_parent = null & category = 0;
-             limit 200;`
+            `fields 
+            id,
+            name,
+            first_release_date,
+            platforms.name,
+            release_dates.human,
+            release_dates.category,
+            release_dates.date;
+            search "${query}";
+            where version_parent = null & category = 0 & platforms != null;
+            limit 200;`
     })
 }
 
@@ -30,9 +37,16 @@ const getTrackedGameList = (trackedListID) => {
             'Authorization': 'Bearer zacq1qom1jddqxijm9d5ioqb9hyo3m',
         },
         data:
-            `fields id,name,first_release_date,platforms.name,release_dates.human,release_dates.category,release_dates.date;
-             where id = (${trackedListID.toString()}) & version_parent = null & category = 0;
-             limit 200;`
+            `fields 
+            id,
+            name,
+            first_release_date,
+            platforms.name,
+            release_dates.human,
+            release_dates.category,
+            release_dates.date;
+            where id = (${trackedListID.toString()}) & version_parent = null & category = 0;
+            limit 200;`
     })
 }
 
@@ -47,9 +61,9 @@ const getSingleGame = (id) => {
             'Authorization': 'Bearer zacq1qom1jddqxijm9d5ioqb9hyo3m',
         },
         data:
-            `fields id,name,first_release_date,platforms.name,genres.name,cover.image_id;
+            `fields id,name,first_release_date,platforms.name,genres.name,cover.image_id,release_dates,release_dates.platform.name,release_dates.region,release_dates.date,release_dates.category,release_dates.human;
              where id = ${id};`
     })
 }
 
-export {getGameList,getTrackedGameList,getSingleGame}
+export {getGameList, getTrackedGameList, getSingleGame}
