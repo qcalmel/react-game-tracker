@@ -2,14 +2,7 @@ const getDate = (game) => {
     if(!game.release_dates)
         return 'No Date'
     const firstRelease = getFirstRelease(game.release_dates)
-    switch (firstRelease.category) {
-        case 0 :
-            return new Date(firstRelease.date * 1000).toLocaleDateString("fr-FR")
-        case 1 :
-            return new Date(firstRelease.date * 1000).toLocaleDateString("fr-FR",{year:'numeric',month:'numeric'})
-        default :
-            return firstRelease.human
-    }
+    return showDateByCategory(firstRelease)
 }
 
 const getFirstRelease = (releases) => {
@@ -20,4 +13,15 @@ const getFirstRelease = (releases) => {
 
 }
 
-export {getDate}
+const showDateByCategory = (release) => {
+    switch (release.category) {
+        case 0 :
+            return new Date(release.date * 1000).toLocaleDateString("fr-FR")
+        case 1 :
+            return new Date(release.date * 1000).toLocaleDateString("fr-FR",{year:'numeric',month:'numeric'})
+        default :
+            return release.human
+    }
+}
+
+export {getDate,showDateByCategory}
